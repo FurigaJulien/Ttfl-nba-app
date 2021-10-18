@@ -1,0 +1,1 @@
+web: sh setup.sh && streamlit run ttfl_app.py
