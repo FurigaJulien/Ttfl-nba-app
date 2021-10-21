@@ -27,11 +27,11 @@ def get_player_record(player_name,nb,season_type):
     j=0
     for i in range(nb):
 
-        year = 2020-i
-        if i>21:
-            year2 = 121-i
+        year = 2021-i
+        if i>22:
+            year2 = 122-i
         else:
-            year2 = 21-i
+            year2 = 22-i
 
         if year2<10:
             year2 = f'0{year2}'
