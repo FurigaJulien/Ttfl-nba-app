@@ -170,10 +170,10 @@ def app():
             data = data.sort_values(by='ttfl_points',ascending=False)
 
             data_top=data[data['ttfl_points']>=40]
-            st.write("### Ils ont cartonnés", data_top)
+            st.write("### Ils ont cartonné", data_top)
 
             data_boulot=data[data['ttfl_points'].between(31,39)]
-            st.write("### Ils ont assurés", data_boulot)
+            st.write("### Ils ont assuré", data_boulot)
 
             data_mieux=data[data['ttfl_points'].between(26,30)]
             data_mieux=data_mieux[data_mieux['Player'].isin(liste_player)]
