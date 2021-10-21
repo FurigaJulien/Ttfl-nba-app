@@ -23,6 +23,7 @@ def app():
 "LaMelo Ball",
 "Terry Rozier",
 "Miles Bridges",
+"Aleksej Pokusevski",
 "Gordon Hayward",
 "Mason Plumlee",
 "Kelly Oubre" ,
@@ -92,6 +93,7 @@ def app():
 "James Harden" ,
 "Kyrie Irving" ,
 "Joe Harris" ,
+"Steven Adams",
 "LaMarcus Aldridge" ,
 "Nikola Jokic",
 "Michael Porter Jr.",
@@ -100,8 +102,10 @@ def app():
 "Kemba Walker" ,
 "Julius Randle",
 "Evan Fournier" ,
+"Bojan Bogdanovic",
 "R.J. Barrett" ,
 "Derrick Rose",
+"Devonte' Graham"
 "Ja Morant",
 "Jaren Jackson Jr.",
 "Dillon Brooks",
@@ -148,6 +152,8 @@ def app():
 "Dejounte Murray" 
 "Derrick White" ,
 "Keldon Johnson" ,
+"Joe Ingles",
+"Goran Dragic",
 "Thaddeus Young","Jakob Poeltl",
 "De'Aaron Fox","Tyrese Haliburton" ,"Richaun Holmes","Harrison Barnes" ,"Buddy Hield","Davion Mitchell",
 "Karl-Anthony Towns","Anthony Edwards" ,
@@ -166,14 +172,14 @@ def app():
             data_top=data[data['ttfl_points']>=40]
             st.write("### Ils ont cartonnés", data_top)
 
-            data_boulot=data[data['ttfl_points'].between(30,39)]
-            st.write("### Ils ont fait le boulot ", data_boulot)
+            data_boulot=data[data['ttfl_points'].between(31,39)]
+            st.write("### Ils ont assurés", data_boulot)
 
-            data_mieux=data[data['ttfl_points'].between(24,29)]
+            data_mieux=data[data['ttfl_points'].between(26,30)]
             data_mieux=data_mieux[data_mieux['Player'].isin(liste_player)]
-            st.write("### Ils peuvent faire mieux", data_mieux)
+            st.write("### C'est pas trop mal", data_mieux)
 
-            data_pourri=data[data['ttfl_points'].between(15,23)]
+            data_pourri=data[data['ttfl_points'].between(16,25)]
             data_pourri=data_pourri[data_pourri['Player'].isin(liste_player)]
 
             st.write("### Un peu pourri quand même", data_pourri)
