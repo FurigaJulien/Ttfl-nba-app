@@ -181,7 +181,7 @@ def app():
 
             data_carote=data[data['ttfl_points']<16]
             data_carote=data_carote[data_carote['Player'].isin(liste_player)]
-            st.write("### Les belles carrotes", data_carote)
+            st.write("### Les belles carottes", data_carote)
 
 
             # except:
