@@ -1,8 +1,8 @@
 FROM python:3.7
 WORKDIR /app
 COPY requirements.txt ./requirements.txt
-RUN pip install -r requiremts.txt
+RUN pip install -r requirements.txt
 EXPOSE 8501
-COPY ./app
+COPY . /app 
 ENTRYPOINT ["streamlit", "run"]
-CMD ["streamlit_ttfl.py"]
+CMD ["app.py"]
