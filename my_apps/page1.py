@@ -4,6 +4,7 @@ from get_player_records import *
 from urllib.error import URLError
 import pandas as pd
 from get_player_records import *
+from get_matchups import *
 
 
 
@@ -24,6 +25,15 @@ def app():
                 best_worst = st.selectbox('Le meilleur ou le pire ?', ['Le meilleur',"Le pire"], key=2)
                 nb_year = st.slider(label='Depuis combien de temps ?', min_value=1, max_value=40, key=4)
                 submitted1 = st.form_submit_button('Rechercher')
+
+        with col2:
+            with st.form('Les matchups des joueurs !'):
+                player_name_m = st.text_input('Selectionnez un joueur')
+                player_name_vs = st.text_input('Selectionnez son matchup')
+                season_type_m = st.selectbox('Selectionnez un type de saison', ['Regular Season', 'Playoffs','Pre Season',"All Star"])
+                nb_year_m = st.slider(label='Depuis combien de temps ?', min_value=1, max_value=40, key=4)
+                submitted2 = st.form_submit_button('Rechercher')
+
 
 
         
@@ -57,6 +67,28 @@ def app():
                 except:
                         
                         st.error("Le joueur n'a pas pu être trouvé, désolé ! Verifiez peut être l'orthographe ! " )
+
+                
+        if submitted2:
+            with col2:
+                bar2 = st.progress(0)
+                try :
+                    for values in get_matchup(player_name_m,player_name_vs,nb_year_m,season_type_m):
+                        try :
+                            data = values
+                            bar2.progress(int((data+1)*100/nb_year_m))
+                        except:
+                            data = values
+                            st.write("Matchup TTFL :",data.sort_values('ttfl_points',ascending=False))
+                        
+
+
+
+                except:
+                        
+                        st.error("Le joueur n'a pas pu être trouvé, désolé ! Verifiez peut être l'orthographe ! " )
+
+
 
 
 
