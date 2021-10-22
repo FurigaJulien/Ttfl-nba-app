@@ -51,56 +51,56 @@ def find_ttfl_record_for_day(game_date):
         time.sleep(0.600)
 
             
-    for i in range(len(data_match)):
-        
-        player = data_match.iloc[i]
-        player_name = player['PLAYER_NAME']
-        if player['MIN'] is not None:
+        for i in range(len(data_match)):
             
-            three_pt_fg = player['FG3M']
-            three_pt_attempted = player['FG3A']
-            assists = player['AST']
-            blocks = player['BLK']
-            field_goals = player['FGM']
-            field_goals_attempted = player['FGA']
-            free_throw = player['FTM']
-            free_throw_attempted = player['FTA']
-            rebunds = player['REB']
-            steal = player['STL']
-            turnover = player['TO']
-            points = player['PTS']
-            game_status="Terminé"
-            ttfl_points = three_pt_fg - (three_pt_attempted-three_pt_fg) + assists + blocks + field_goals - (field_goals_attempted-field_goals) + free_throw - (free_throw_attempted-free_throw) + rebunds + steal - turnover + points
-        else:
-            player = CumeStatsPlayer(player_id=player['PLAYER_ID'],game_ids=[player['GAME_ID']]).get_data_frames()[0]
-            time.sleep(0.600)
-
-            three_pt_fg = player['FG3']
-            three_pt_attempted = player['FG3A']
-            assists = player['AST']
-            blocks = player['BLK']
-            field_goals = player['FG']
-            field_goals_attempted = player['FGA']
-            free_throw = player['FT']
-            free_throw_attempted = player['FTA']
-            rebunds = player['TOT_REB']
-            steal = player['STL']
-            turnover = player['TURNOVERS']
-            points = player['PTS']
-            game_status="En cours"
-            ttfl_points = three_pt_fg - (three_pt_attempted-three_pt_fg) + assists + blocks + field_goals - (field_goals_attempted-field_goals) + free_throw - (free_throw_attempted-free_throw) + rebunds + steal - turnover + points
-            
-
-        try:
-            ttfl_points = int(ttfl_points)
-        except:
-            ttfl_points = 0
-        ttfl_points_list.append(ttfl_points)
-        player_name_list.append(player_name)
-        game_id_list.append(game_id)
-        game_status_list.append(game_status)
-        date_list.append(game_date)
+            player = data_match.iloc[i]
+            player_name = player['PLAYER_NAME']
+            if player['MIN'] is not None:
                 
+                three_pt_fg = player['FG3M']
+                three_pt_attempted = player['FG3A']
+                assists = player['AST']
+                blocks = player['BLK']
+                field_goals = player['FGM']
+                field_goals_attempted = player['FGA']
+                free_throw = player['FTM']
+                free_throw_attempted = player['FTA']
+                rebunds = player['REB']
+                steal = player['STL']
+                turnover = player['TO']
+                points = player['PTS']
+                game_status="Terminé"
+                ttfl_points = three_pt_fg - (three_pt_attempted-three_pt_fg) + assists + blocks + field_goals - (field_goals_attempted-field_goals) + free_throw - (free_throw_attempted-free_throw) + rebunds + steal - turnover + points
+            else:
+                player = CumeStatsPlayer(player_id=player['PLAYER_ID'],game_ids=[player['GAME_ID']]).get_data_frames()[0]
+                time.sleep(0.600)
+
+                three_pt_fg = player['FG3']
+                three_pt_attempted = player['FG3A']
+                assists = player['AST']
+                blocks = player['BLK']
+                field_goals = player['FG']
+                field_goals_attempted = player['FGA']
+                free_throw = player['FT']
+                free_throw_attempted = player['FTA']
+                rebunds = player['TOT_REB']
+                steal = player['STL']
+                turnover = player['TURNOVERS']
+                points = player['PTS']
+                game_status="En cours"
+                ttfl_points = three_pt_fg - (three_pt_attempted-three_pt_fg) + assists + blocks + field_goals - (field_goals_attempted-field_goals) + free_throw - (free_throw_attempted-free_throw) + rebunds + steal - turnover + points
+                
+
+            try:
+                ttfl_points = int(ttfl_points)
+            except:
+                ttfl_points = 0
+            ttfl_points_list.append(ttfl_points)
+            player_name_list.append(player_name)
+            game_id_list.append(game_id)
+            game_status_list.append(game_status)
+            date_list.append(game_date)
+                    
                 
 
 
