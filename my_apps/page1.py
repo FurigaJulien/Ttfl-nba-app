@@ -58,7 +58,7 @@ def app():
 
                     else :
                         st.write("Records TTFL :",data.sort_values('ttfl_points',ascending=True)[:30])
-                        game_id = str(data.sort_values('ttfl_points',ascending=False)[:30].iloc[0]['Game ID'])
+                        game_id = str(data.sort_values('ttfl_points',ascending=True)[:30].iloc[0]['Game ID'])
                         graph = get_player_best_match_graph(game_id,player_id)
                         st.pyplot(graph)
 
