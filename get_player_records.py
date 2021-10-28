@@ -1,4 +1,4 @@
-from nba_api.stats.endpoints import playergamelog,boxscoretraditionalv2
+from nba_api.stats.endpoints import playergamelog,boxscoretraditionalv2,commonallplayers
 from nba_api.stats.static.players import find_players_by_full_name
 import pandas as pd
 import time
@@ -20,7 +20,19 @@ def get_player_record(player_name,nb,season_type):
 
     player_name = player_name
 
-    player_id = find_players_by_full_name(player_name)[0]['id']
+    try :
+
+        player = find_players_by_full_name(player_name)[0]
+        player_id = player['id']
+
+
+    except:
+
+        all_players = commonallplayers.CommonAllPlayers().get_data_frames()[0]
+        player_id = all_players[all_players['DISPLAY_FIRST_LAST'] == player_name]['PERSON_ID'].values[0]
+
+
+
     time.sleep(1)
     print(player_id)
 
