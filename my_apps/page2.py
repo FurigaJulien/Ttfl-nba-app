@@ -105,7 +105,7 @@ def app():
 "Bojan Bogdanovic",
 "R.J. Barrett" ,
 "Derrick Rose",
-"Devonte' Graham"
+"Devonte' Graham",
 "Ja Morant",
 "Jaren Jackson Jr.",
 "Dillon Brooks",
