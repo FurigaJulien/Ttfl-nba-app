@@ -146,7 +146,10 @@ def get_player_best_match_graph(game_id,player_id):
 
     ax.set_theta_offset(np.pi / 2)
     ax.set_theta_direction(-1)
-    ax.set_ylim(0,int(points))
+    if int(points)>10:
+        ax.set_ylim(0,int(points))
+    else:
+        ax.set_ylim(0,10)
     # Draw axis lines for each angle and label.
     ax.set_thetagrids(np.degrees(angles), labels)
     for label, angle in zip(ax.get_xticklabels(), angles):
