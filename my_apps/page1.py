@@ -4,8 +4,9 @@ from get_player_records import *
 from urllib.error import URLError
 import pandas as pd
 from get_player_records import *
+from get_matchups_team import *
 from get_matchups import *
-
+from nba_api.stats.static import players,teams
 
 
 def app():
@@ -33,6 +34,13 @@ def app():
                 season_type_m = st.selectbox('Selectionnez un type de saison', ['Regular Season', 'Playoffs','Pre Season',"All Star"])
                 nb_year_m = st.slider(label='Depuis combien de temps ?', min_value=1, max_value=40, key=4)
                 submitted2 = st.form_submit_button('Rechercher')
+
+            with st.form('Les matchups des teams !'):
+                player_name_m_t = st.text_input('Selectionnez un joueur')
+                team_vs = st.selectbox('Selectionnez une équipe adverse', sorted([t[5] for t in teams.teams]))
+                season_type_m_t = st.selectbox('Selectionnez un type de saison', ['Regular Season', 'Playoffs','Pre Season',"All Star"])
+                nb_year_m_t = st.slider(label='Depuis combien de temps ?', min_value=1, max_value=40, key=4)
+                submitted3 = st.form_submit_button('Rechercher')
 
 
 
@@ -77,6 +85,25 @@ def app():
                         try :
                             data = values
                             bar2.progress(int((data+1)*100/nb_year_m))
+                        except:
+                            data = values
+                            st.write("Matchup TTFL :",data.sort_values('ttfl_points',ascending=False))
+                        
+
+
+
+                except:
+                        
+                        st.error("Le joueur n'a pas pu être trouvé, désolé ! Verifiez peut être l'orthographe ! " )
+
+        if submitted3:
+            with col2:
+                bar2 = st.progress(0)
+                try :
+                    for values in get_matchup_team(player_name_m_t,team_vs,nb_year_m_t,season_type_m_t):
+                        try :
+                            data = values
+                            bar2.progress(int((data+1)*100/nb_year_m_t))
                         except:
                             data = values
                             st.write("Matchup TTFL :",data.sort_values('ttfl_points',ascending=False))

@@ -146,7 +146,7 @@ def get_player_best_match_graph(game_id,player_id):
 
     ax.set_theta_offset(np.pi / 2)
     ax.set_theta_direction(-1)
-    if int(points)>10:
+    if int(points)>10: 
         ax.set_ylim(0,int(points))
     else:
         ax.set_ylim(0,10)
