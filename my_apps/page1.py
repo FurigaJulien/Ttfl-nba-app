@@ -5,6 +5,7 @@ from urllib.error import URLError
 import pandas as pd
 from get_player_records import *
 from get_matchups_team import *
+from get_player_shoot_type_ttfl import *
 from get_matchups import *
 from nba_api.stats.static import players,teams
 
@@ -21,14 +22,25 @@ def app():
 
         with col1:
             with st.form('Les records des joueurs !'):
+                st.text('Les records des joueurs !')
                 player_name = st.text_input('Selectionnez un joueur')
                 season_type = st.selectbox('Selectionnez un type de saison', ['Regular Season', 'Playoffs','Pre Season',"All Star"])
                 best_worst = st.selectbox('Le meilleur ou le pire ?', ['Le meilleur',"Le pire"], key=2)
                 nb_year = st.slider(label='Depuis combien de temps ?', min_value=1, max_value=40, key=4)
                 submitted1 = st.form_submit_button('Rechercher')
 
+        with col1:
+            with st.form('Les data de shoots!'):
+                st.text('Les data de shoots !')
+                player_name_shoot = st.text_input('Selectionnez un joueur')
+                season_type_shoot  = st.selectbox('Selectionnez un type de saison', ['Regular Season', 'Playoffs','Pre Season',"All Star"])
+                shoot_type_shoot  = st.selectbox('Type de shoot?', ['LF',"3PTS",'FG'], key=2)
+                nb_year_shoot  = st.slider(label='Depuis combien de temps ?', min_value=1, max_value=40, key=4)
+                submitted4 = st.form_submit_button('Rechercher')
+
         with col2:
             with st.form('Les matchups des joueurs !'):
+                st.text('Les matchups des joueurs !')
                 player_name_m = st.text_input('Selectionnez un joueur')
                 player_name_vs = st.text_input('Selectionnez son matchup')
                 season_type_m = st.selectbox('Selectionnez un type de saison', ['Regular Season', 'Playoffs','Pre Season',"All Star"])
@@ -36,6 +48,7 @@ def app():
                 submitted2 = st.form_submit_button('Rechercher')
 
             with st.form('Les matchups des teams !'):
+                st.text('Les matchups des teams !')
                 player_name_m_t = st.text_input('Selectionnez un joueur')
                 team_vs = st.selectbox('Selectionnez une équipe adverse', sorted([t[5] for t in teams.teams]))
                 season_type_m_t = st.selectbox('Selectionnez un type de saison', ['Regular Season', 'Playoffs','Pre Season',"All Star"])
@@ -70,6 +83,24 @@ def app():
                         graph = get_player_best_match_graph(game_id,player_id)
                         st.pyplot(graph)
 
+
+
+                except:
+                        
+                        st.error("Le joueur n'a pas pu être trouvé, désolé ! Verifiez peut être l'orthographe ! " )
+
+        if submitted4:
+            with col1:
+                bar = st.progress(0)
+                try :
+                    for values,season,player_id in get_player_shoot(player_name_shoot,nb_year_shoot,season_type_shoot,shoot_type_shoot):
+                        try :
+                            data,season,player_id = values,season,player_id
+                            
+                            bar.progress(int((data+1)*100/nb_year_shoot))
+                        except:
+                            data,season,player_id = values,season,player_id
+                            st.write("Les datas :",data)
 
 
                 except:
