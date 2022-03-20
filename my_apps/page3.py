@@ -21,7 +21,7 @@ def app():
         with st.form('Les records des joueurs !'):
             special_day = st.selectbox('Quelle date ?', ["Opening night","Christmas day","MLK day","Closing night"], key=2)
             best_worst = st.selectbox('Le meilleur ou le pire ?', ['Le meilleur',"Le pire"], key=2)
-            nb_year = st.slider(label='Depuis combien de temps ?', min_value=1, max_value=40, key=4)
+            nb_year = st.slider(label='Depuis combien de temps ?', min_value=1, max_value=38, key=4)
             submitted1 = st.form_submit_button('Rechercher')
 
 
@@ -55,7 +55,7 @@ def app():
 
             except:
                     
-                    st.error("Le joueur n'a pas pu être trouvé, désolé ! Verifiez peut être l'orthographe ! " )
+                    st.error("Une erreur sauvage apparait ! Veuillez contacter Julien" )
 
 
 
